@@ -4,19 +4,19 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   border-radius: 5px;
-  border: solid 1px black;
 `
 
 interface InputFieldProps {
   padding?: string
   fontSize?: string
 }
+
 export const InputField = styled.input<InputFieldProps>`
-  padding: ${({ padding }) => padding ? padding : '1%'};
-  font-size: ${({ fontSize }) => fontSize ? fontSize : '0.5rem'};
-  outline: none;
-  border: none;
-  margin: 0;
   width: 100%;
+  padding: ${({ padding }) => (padding ? padding : '2%')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '1rem')};
+  background-color: #d3d3d3;
+  border: none;
+  outline: none;
   box-sizing: border-box;
 `
