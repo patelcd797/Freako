@@ -12,10 +12,8 @@ import {
 import Button from '../../../common/Button/Button'
 import { A, ErrorStyle, Form, Div } from '../../../common/styles'
 import Input from '../../../common/Input/Input'
-import { useHistory } from 'react-router-dom'
 
 const Login = () => {
-  const history = useHistory()
   const [state, setState] = useState({ email: '', password: '' })
   const [error1, setError1] = useState('')
   const [error2, setError2] = useState('')
@@ -30,8 +28,6 @@ const Login = () => {
     }))
   }
 
-  const handleForgotPassword = () => history.push('/forgotpassword')
-  const handleSignUp = () => history.push('/register')
   const handleSubmit = () => {}
 
   return (
@@ -61,8 +57,8 @@ const Login = () => {
           </Container>
           <Container>
             <Div>
-              <A style={{ color: '#A9A9A9' }} onClick={handleForgotPassword}>
-                Forgot Password
+              <A style={{ color: '#A9A9A9' }} href="/forgotpassword">
+                forgot password
               </A>
             </Div>
             <Button width="100%" type="submit" backgroundColor="green">
@@ -78,13 +74,8 @@ const Login = () => {
           <LoginOtherOptionsSubContainer>Google</LoginOtherOptionsSubContainer>
         </LoginOtherOptionsContainer>
         <LoginLinkContainer>
-          Not a member?{' '}
-          <A
-            style={{ borderBottom: '1px solid #A9A9A9' }}
-            onClick={handleSignUp}
-          >
-            Sign up now
-          </A>
+          Not a member?
+          <A href="/register" style={{ color: '#A9A9A9' }}> Sign up now</A>
         </LoginLinkContainer>
       </LoginFormContainer>
     </MainContainer>

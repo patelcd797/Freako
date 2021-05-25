@@ -16,7 +16,7 @@ interface ButtonFieldProps {
 }
 
 export const ButtonField = styled.button<ButtonFieldProps>`
-  padding: ${({ padding }) => (padding ? padding : '2%')};
+  padding: ${({ padding }) => (padding ? padding : '4%')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize : '1rem')};
   color: ${({ color }) => (color ? color : '#000000')};
   background-color: ${({ backgroundColor }) =>
@@ -30,5 +30,8 @@ export const ButtonField = styled.button<ButtonFieldProps>`
   box-sizing: border-box;
   &:hover {
     filter: brightness(105%);
+  }
+  @media only screen and (max-width: 1025px) and (min-width: 767px) {
+    font-size: ${({ fontSize }) => (fontSize ? fontSize : '2rem')};
   }
 `

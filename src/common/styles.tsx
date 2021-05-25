@@ -41,5 +41,5 @@ export const Form = styled.form`
 export const Div = styled.div`
   display: block;
   float: right;
-  margin-bottom: 2%;
+  margin: 4% 0;
 `
