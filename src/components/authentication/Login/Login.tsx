@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
 import {
-  Container,
-  LoginFormContainer,
-  LoginFormTitle,
   LoginLinkContainer,
   LoginOtherOptionsContainer,
-  LoginOtherOptionsSubContainer,
-  MainContainer,
-  TextContainer,
+  LoginOtherOptionsSubContainer
 } from './Login-style'
 import Button from '../../../common/Button/Button'
-import { A, ErrorStyle, Form, Div } from '../../../common/styles'
+import {
+  A,
+  ErrorStyle,
+  Form,
+  Div,
+  MainContainer,
+  FormContainer,
+  Container,
+  FormTitle,
+  TextContainer,
+} from '../../../common/styles'
 import Input from '../../../common/Input/Input'
 
 const Login = () => {
@@ -32,8 +37,8 @@ const Login = () => {
 
   return (
     <MainContainer>
-      <LoginFormContainer>
-        <LoginFormTitle>Login</LoginFormTitle>
+      <FormContainer>
+        <FormTitle>Login</FormTitle>
         <Form onSubmit={handleSubmit}>
           <Container>
             <Input
@@ -75,9 +80,12 @@ const Login = () => {
         </LoginOtherOptionsContainer>
         <LoginLinkContainer>
           Not a member?
-          <A href="/register" style={{ color: '#A9A9A9' }}> Sign up now</A>
+          <A href="/register" style={{ color: '#A9A9A9' }}>
+            {' '}
+            Sign up now
+          </A>
         </LoginLinkContainer>
-      </LoginFormContainer>
+      </FormContainer>
     </MainContainer>
   )
 }

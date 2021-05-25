@@ -18,7 +18,7 @@ interface ButtonFieldProps {
 export const ButtonField = styled.button<ButtonFieldProps>`
   padding: ${({ padding }) => (padding ? padding : '4%')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize : '1rem')};
-  color: ${({ color }) => (color ? color : '#000000')};
+  color: ${({ color }) => (color ? color : '#ffffff')};
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : '#FFD742'};
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '400')};

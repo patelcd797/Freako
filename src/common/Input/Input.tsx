@@ -1,4 +1,4 @@
-import React, { Children, DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 import { InputContainer, InputField } from './Input-style'
 
 interface InputProps
