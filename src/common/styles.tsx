@@ -25,7 +25,7 @@ export const Label = styled.label`
 export const ErrorStyle = styled.div`
   color: red;
   font-weight: 500;
-  margin-top: -0.8em;
+  margin-top: 0.8em;
   box-sizing: border-box;
 `
 

@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import Button from '../../../common/Button/Button'
 import Input from '../../../common/Input/Input'
 import {
   A,
   Container,
   ErrorStyle,
-  Form,
   FormContainer,
   FormTitle,
   MainContainer,
   TextContainer,
+  Form,
 } from '../../../common/styles'
 import { NameContainer } from './Register-styles'
+import { useHistory } from 'react-router-dom'
 
-const InitialFormValues = {
+const initialValues = {
   firstName: '',
   lastName: '',
   email: '',
@@ -21,17 +23,12 @@ const InitialFormValues = {
   confirmPassword: '',
 }
 
-const Style = {
-  padding: '8%',
-  '@media (max-width: 783px)': { padding: '4%' }
-}
-
 const Register: React.FC = () => {
-  const [state, setState] = useState(InitialFormValues)
-  const [error1, seterror1] = useState('')
-  const [error2, seterror2] = useState('')
-  const [error3, seterror3] = useState('')
-  
+  const [state, setState] = useState(initialValues)
+  const [error1, setError1] = useState('')
+  const [error2, setError2] = useState('')
+  const [error3, setError3] = useState('')
+  const history = useHistory()
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name
@@ -41,47 +38,82 @@ const Register: React.FC = () => {
       ...prev,
       [name]: value,
     }))
+    console.log(state.password)
   }
 
-  const handleSubmit = () => {}
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    var f2 = 1, f3 = 1
+    if (state.password.length < 6) {
+      setError2('password must contain lower case, upper case and digits')
+      f2 = 0
+    } else {
+      setError2('')
+      f2 = 1
+    }
+    if (state.password !== state.confirmPassword) {
+      setError3('password and confirm password must be same')
+      f2 = 0
+    } else {
+      setError3('')
+      f3 = 1
+    }
+    if(f2 && f3)
+      {
+        console.log('yes');
 
-  
+        await axios.post('http://localhost:1224/api/user/register', state)
+        .then(response => {
+          const data = response.data
+          if(data.success)
+           history.push('/login')
+          else
+           setError1(data.msg)
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      }
+  }
+
   return (
     <MainContainer>
       <FormContainer>
         <FormTitle>Register</FormTitle>
         <Form onSubmit={handleSubmit}>
-            
           <NameContainer>
             <Container>
               <Input
                 type="text"
                 name="firstName"
                 padding="8%"
-                value={state.firstName}
                 placeholder="First Name"
+                value={state.firstName}
                 onChange={handleInput}
+                required
               />
-              </Container>
+            </Container>
             <Container>
               <Input
                 type="text"
                 name="lastName"
-                padding= "8%"
-                value={state.lastName}
+                padding="8%"
                 placeholder="Last Name"
+                value={state.lastName}
                 onChange={handleInput}
+                required
               />
-        </Container>
+            </Container>
           </NameContainer>
-          
+
           <Container>
             <Input
               type="email"
               name="email"
-              value={state.email}
               placeholder="Email"
+              value={state.email}
               onChange={handleInput}
+              required
             />
             {error1 && <ErrorStyle>{error1}</ErrorStyle>}
           </Container>
@@ -89,8 +121,8 @@ const Register: React.FC = () => {
             <Input
               type="password"
               name="password"
-              value={state.password}
               placeholder="Password"
+              value={state.password}
               onChange={handleInput}
             />
             {error2 && <ErrorStyle>{error2}</ErrorStyle>}
@@ -99,8 +131,8 @@ const Register: React.FC = () => {
             <Input
               type="password"
               name="confirmPassword"
-              value={state.confirmPassword}
               placeholder="Confirm Password"
+              value={state.confirmPassword}
               onChange={handleInput}
             />
             {error3 && <ErrorStyle>{error3}</ErrorStyle>}
