@@ -1,7 +1,7 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import Button from '../../../common/Button/Button'
-import Input from '../../../common/Input/Input'
+import axios from "axios";
+import React, { useState } from "react";
+import Button from "../../../common/Button/Button";
+import Input from "../../../common/Input/Input";
 import {
   A,
   Container,
@@ -11,70 +11,68 @@ import {
   MainContainer,
   TextContainer,
   Form,
-} from '../../../common/styles'
-import { NameContainer } from './Register-styles'
-import { useHistory } from 'react-router-dom'
+} from "../../../common/styles";
+import { NameContainer } from "./Register-styles";
+import { useHistory } from "react-router-dom";
 
 const initialValues = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Register: React.FC = () => {
-  const [state, setState] = useState(initialValues)
-  const [error1, setError1] = useState('')
-  const [error2, setError2] = useState('')
-  const [error3, setError3] = useState('')
-  const history = useHistory()
+  const [state, setState] = useState(initialValues);
+  const [error1, setError1] = useState("");
+  const [error2, setError2] = useState("");
+  const [error3, setError3] = useState("");
+  const history = useHistory();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name
-    const value = e.target.value
-    e.preventDefault()
+    const name = e.target.name;
+    const value = e.target.value;
+    e.preventDefault();
     setState((prev) => ({
       ...prev,
       [name]: value,
-    }))
-    console.log(state.password)
-  }
+    }));
+    console.log(state.password);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    var f2 = 1, f3 = 1
+    event.preventDefault();
+    var f2 = 1,
+      f3 = 1;
     if (state.password.length < 6) {
-      setError2('password must contain lower case, upper case and digits')
-      f2 = 0
+      setError2("password must contain lower case, upper case and digits");
+      f2 = 0;
     } else {
-      setError2('')
-      f2 = 1
+      setError2("");
+      f2 = 1;
     }
     if (state.password !== state.confirmPassword) {
-      setError3('password and confirm password must be same')
-      f2 = 0
+      setError3("password and confirm password must be same");
+      f2 = 0;
     } else {
-      setError3('')
-      f3 = 1
+      setError3("");
+      f3 = 1;
     }
-    if(f2 && f3)
-      {
-        console.log('yes');
-
-        await axios.post('http://localhost:1224/api/user/register', state)
-        .then(response => {
-          const data = response.data
-          if(data.success)
-           history.push('/login')
-          else
-           setError1(data.msg)
+    if (f2 && f3) {
+      
+      await axios
+        .post("http://localhost:1224/api/user/register", state)
+        .then((response) => {
+          const data = response.data;
+          if (data.success) history.push("/login");
+          else setError1(data.msg);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
-      }
-  }
+    }
+  };
 
   return (
     <MainContainer>
@@ -144,14 +142,14 @@ const Register: React.FC = () => {
           </Container>
           <TextContainer>
             Already have an account?
-            <A href="/login" style={{ color: '#A9A9A9' }}>
+            <A href="/login" style={{ color: "#A9A9A9" }}>
               Sign in
             </A>
           </TextContainer>
         </Form>
       </FormContainer>
     </MainContainer>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

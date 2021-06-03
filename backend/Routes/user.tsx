@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require("bcrypt")
 const user = require('../dbModules/user.tsx')
 
 // register page route.
 router.post('/register', async (req, res, next) => {
   const userObject = req.body
+  bcrypt.hash(req.body.password, 10).then(hash => userObject.password=hash)
   user.findOne({ email: userObject.email }, async function (err, users) {
     if (err) {
       return res.json({ success: false, msg: 'error occurred' })
