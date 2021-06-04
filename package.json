@@ -27,7 +27,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"cd backend && nodemon server\"",
     "start-server": "cd backend && nodemon server",
     "build": "react-scripts build",
     "test": "react-scripts test",
