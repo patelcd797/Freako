@@ -1,6 +1,5 @@
 const express = require('express') 
 const PORT = 1224
-const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoute = require("./Routes/user.tsx")

@@ -56,16 +56,6 @@ router.post("/login", (req, res) => {
 });
 
 
-// forgot password page route
-
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'ffreako617@gmail.com',
-//     pass: 'Freako@1234'
-//   }
-
-// })
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -93,8 +83,6 @@ router.post('/forgotPassword', (req, res) =>{
       transporter.sendMail(mailOptions, (err, info) =>{
         if(err)
          {
-           console.log(err);
-           
            return res.json({success: false, 'msg': 'something wrong happens please try after sometime'})
          }
         else
